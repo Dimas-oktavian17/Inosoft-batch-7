@@ -20,6 +20,133 @@
       gap: 6.5rem;
       align-self: stretch;
     }
+
+    /* utils */
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .flex-row {
+      flex-direction: row;
+    }
+
+    .flex-row-reverse {
+      flex-direction: row-reverse;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .flex-col-reverse {
+      flex-direction: column-reverse;
+    }
+
+    /* align */
+    .items-start {
+      align-items: flex-start;
+    }
+
+    .items-end {
+      align-items: flex-end;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .items-baseline {
+      align-items: baseline;
+    }
+
+    .items-stretch {
+      align-items: stretch;
+    }
+
+    /* justify */
+    .justify-normal {
+      justify-content: normal;
+    }
+
+    .justify-start {
+      justify-content: flex-start;
+    }
+
+    .justify-end {
+      justify-content: flex-end;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .justify-around {
+      justify-content: space-around;
+    }
+
+    .justify-evenly {
+      justify-content: space-evenly;
+    }
+
+    .justify-stretch {
+      justify-content: stretch;
+    }
+
+    /* width */
+    .w-full {
+      width: 100%;
+    }
+
+
+
+    @media only screen and (max-width: 1024px) {
+      .w-50 {
+        width: 50%;
+      }
+    }
+
+    /* Gaya umum untuk tag <details> dan <summary> */
+    details {
+      border: 1px solid #00ff00;
+      /* Warna border hijau */
+      border-radius: 5px;
+      /* Sudut bulat */
+      margin-bottom: 10px;
+      /* Ruang antar accordion */
+    }
+
+    summary {
+      background-color: #00ff00;
+      /* Warna latar belakang hijau */
+      color: #ffffff;
+      /* Warna teks putih */
+      padding: 10px;
+      /* Ruang dalam summary */
+      cursor: pointer;
+      /* Ubah kursor saat diarahkan ke pointer */
+    }
+
+    /* Gaya untuk teks di dalam accordion */
+    p {
+      padding: 10px;
+      /* Ruang dalam teks */
+    }
+
+    /* Gaya saat accordion dibuka */
+    details[open] summary {
+      background-color: #ffffff;
+      /* Warna latar belakang putih saat dibuka */
+      color: #00ff00;
+      /* Warna teks hijau saat dibuka */
+    }
   </style>
 </head>
 
@@ -27,7 +154,6 @@
   <!-- Header -->
   <nav class="navbar navbar-expand-lg bg-transparent ">
     <div class="container">
-
       <a class="navbar-brand fw-bold " href="#">
         <svg width="35" height="24" viewBox="0 0 35 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -40,7 +166,7 @@
           <path d="M20.9615 13.4341L26.9839 24H14.6526L20.7744 13.4341H20.9615Z" fill="#4CAF4F" />
           <path d="M22.2653 12.7935L28.1591 23.1978L34.1347 12.7935H22.2653Z" fill="#4CAF4F" />
         </svg>
-        Navbar
+        Next
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,12 +181,6 @@
             <a class="nav-link" href="#service">Service</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#feature">Feature</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#product">Product</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#testi">Testimonial</a>
           </li>
           <li class="nav-item">
@@ -71,199 +191,233 @@
       </div>
     </div>
   </nav>
-  <main class="container">
+  <main class="">
     <!-- home -->
-    <section id="#" class="row px-5 py-5 d-flex justify-content-center  align-items-center ">
-      <aside class="col-lg-6 gap-5 ">
-        <h1 class="fw-semibold fs-1 lh-base text-body">
-          Lessons and insights from
-          <span class="bg-success text-white px-1 fw-bold "> 8 years</span>
-        </h1>
-        <p class="fw-medium opacity-50 pe-lg-5  ">
-          Where to grow your business as a photographer: site or social media?
-        </p>
-        <a class="bg-success px-3   py-2 text-decoration-none rounded   text-white " href="">
-          Get started
-        </a>
-      </aside>
-      <picture class="col-lg-6">
-        <img src="./public/Illustration.svg" class="w-75     h-auto " alt="hero">
-      </picture>
-    </section>
+    <div class="container">
+      <section id="#" class=" row px-5 py-5 d-flex justify-content-center  align-items-center ">
+        <aside class="col-lg-6 gap-5 ">
+          <h1 class="fw-semibold fs-1 lh-base text-body">
+            Lessons and insights from
+            <span class="bg-success text-white px-1 fw-bold "> 8 years</span>
+          </h1>
+          <p class="fw-medium opacity-50 pe-lg-5  ">
+            Where to grow your business as a photographer: site or social media?
+          </p>
+          <a class="bg-success px-3   py-2 text-decoration-none rounded   text-white " href="">
+            Get started
+          </a>
+        </aside>
+        <picture class="col-lg-6">
+          <img src="./public/Illustration.svg" class="w-75     h-auto " alt="hero">
+        </picture>
+      </section>
+    </div>
     <!-- end home -->
     <!-- service -->
-    <section id="service" class="row px-5 py-5 d-flex justify-content-center  align-items-center ">
-      <header class="col-12 text-center pb-5">
-        <h1 class="fs-2 fw-semibold lh-base">
-          Manage your entire community in a single system
-        </h1>
-        <p class="opacity-50">
-          Who is Nextcent suitable for?
-        </p>
-      </header>
-      <aside class="col-lg-4 gap-5 ">
-        <div class="card border  border-0 d-flex justify-content-center  align-items-center " style="width: 18rem;">
-          <img src="./public/member.svg"
-            class="card-img-top w-25  h-auto d-flex  justify-content-center  align-items-center bg-light " alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Membership Organisations</h5>
-            <p class="card-text opacity-50 ">
-              Our membership management software provides full automation of membership renewals and payments
-            </p>
+    <div class="container">
+      <section id="service" class="container row  py-5 d-flex justify-content-center  align-items-center ">
+        <header class="col-12 text-center pb-5">
+          <h1 class="fs-2 fw-semibold lh-base">
+            Manage your entire community in a single system
+          </h1>
+          <p class="opacity-50">
+            Who is Nextcent suitable for?
+          </p>
+        </header>
+        <aside class="col-lg-4 col-12 ">
+          <div class="card border  border-0 d-flex justify-content-center  align-items-center ">
+            <img src="./public/member.svg"
+              class="card-img-top w-25  h-auto d-flex  justify-content-center  align-items-center bg-light " alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title">Membership Organisations</h5>
+              <p class="card-text opacity-50 ">
+                Our membership management software provides full automation of membership renewals and payments
+              </p>
 
+            </div>
           </div>
-        </div>
-      </aside>
-      <aside class="col-lg-4 gap-5 ">
-        <div class="card  border  border-0 d-flex justify-content-center  align-items-center " style="width: 18rem;">
-          <img src="./public/nature.svg"
-            class="card-img-top w-25  h-auto d-flex  justify-content-center  align-items-center bg-light " alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">National Associations</h5>
-            <p class="card-text opacity-50">Our membership management software provides full automation of membership
-              renewals and payments
-            </p>
-
+        </aside>
+        <aside class="col-lg-4 col-12  ">
+          <div class="card  border  border-0 d-flex justify-content-center  align-items-center ">
+            <img src="./public/nature.svg"
+              class="card-img-top w-25  h-auto d-flex  justify-content-center  align-items-center bg-light " alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title">National Associations</h5>
+              <p class="card-text opacity-50">Our membership management software provides full automation of membership
+                renewals and payments
+              </p>
+            </div>
           </div>
-        </div>
-      </aside>
-      <aside class="col-lg-4 gap-5 ">
-        <div class="card  border  border-0 d-flex justify-content-center  align-items-center  " style="width: 18rem;">
-          <img src="./public/clubs-grups.svg"
-            class="card-img-top w-25  h-auto d-flex  justify-content-center  align-items-center bg-light " alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">Clubs And Groups</h5>
-            <p class="card-text opacity-50">
-              Our membership management software provides full automation of membership renewals and payments
-            </p>
+        </aside>
+        <aside class="col-lg-4  col-12 ">
+          <div class="card  border  border-0 d-flex justify-content-center  align-items-center  ">
+            <img src="./public/clubs-grups.svg"
+              class="card-img-top w-25  h-auto d-flex  justify-content-center  align-items-center bg-light " alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title">Clubs And Groups</h5>
+              <p class="card-text opacity-50">
+                Our membership management software provides full automation of membership renewals and payments
+              </p>
+            </div>
           </div>
-        </div>
-      </aside>
-
-    </section>
+        </aside>
+      </section>
+    </div>
     <!-- end service -->
-    <!-- feature -->
-    <section id="feature" class="row px-5 py-5 d-flex justify-content-center  align-items-center ">
-      <aside class="col-lg-6 gap-5 ">
-        <h1 class="fw-semibold fs-1 lh-base text-body">
-          Lessons and insights from
-          <span class="bg-success text-white px-1 fw-bold "> 8 years</span>
-        </h1>
-        <p class="fw-medium opacity-50 pe-lg-5  ">
-          Where to grow your business as a photographer: site or social media?
-        </p>
-        <a class="bg-success px-3   py-2 text-decoration-none rounded   text-white " href="">
-          Get started
-        </a>
-      </aside>
-      <picture class="col-lg-6">
-        <img src="./public/Illustration.svg" class="w-75     h-auto " alt="hero">
-      </picture>
-    </section>
-    <!-- end feature -->
-    <!-- product -->
-    <section id="product" class="row px-5 py-5 d-flex justify-content-center  align-items-center ">
-      <aside class="col-lg-6 gap-5 ">
-        <h1 class="fw-semibold fs-1 lh-base text-body">
-          Lessons and insights from
-          <span class="bg-success text-white px-1 fw-bold "> 8 years</span>
-        </h1>
-        <p class="fw-medium opacity-50 pe-lg-5  ">
-          Where to grow your business as a photographer: site or social media?
-        </p>
-        <a class="bg-success px-3   py-2 text-decoration-none rounded   text-white " href="">
-          Get started
-        </a>
-      </aside>
-      <picture class="col-lg-6">
-        <img src="./public/Illustration.svg" class="w-75     h-auto " alt="hero">
-      </picture>
-    </section>
-    <!-- end product -->
+    <!-- testi -->
+    <div class="bg-light py-5">
+      <section id="testi" class="container flex flex-lg-row flex-column   justify-between items-center  ">
+        <aside class="w-50 w-full text-center ">
+          <h1 class="fw-semibold fs-1 lh-base text-body">
+            Helping a local
+          </h1>
+          <span class="bg-success text-white fs-1 fw-bold">business reinvent itself</span>
+          <p class="fw-medium fs-6 opacity-50 ">
+            We reached here with our hard work and dedication
+          </p>
+        </aside>
+        <aside class="w-50 w-full">
+          <article class="flex flex-lg-row flex-column  justify-center item-center">
+            <!-- testi wrap -->
+            <aside class="w-50">
+              <!-- testi col -->
+              <header>
+                <img src="./public/member.png" alt="member">
+              </header>
+              <footer class="ms-2 ">
+                <h1 class="fs-4 fw-bold">
+                  2,245,341
+                </h1>
+                <p class="opacity-50 fs-6">
+                  Members
+                </p>
+              </footer>
+            </aside>
+            <!-- testi -->
+            <section class="w-50">
+              <header>
+                <img src="./public/star.svg" alt="star">
+              </header>
+              <footer class="ms-2 ">
+                <h1 class="fs-4 fw-bold">
+                  46,328
+                </h1>
+                <p class="opacity-50 fs-6">
+                  Clubs
+                </p>
+              </footer>
+            </section>
+            <!-- two testi wrap -->
+          </article>
+          <article class="flex flex-lg-row flex-column  justify-center item-center">
+            <!-- testi wrap -->
+            <aside class="w-50">
+              <!-- testi col -->
+              <header>
+                <img src="./public/hand.svg" alt="hand">
+              </header>
+              <footer class="ms-2 ">
+                <h1 class="fs-4 fw-bold">
+                  828,867
+                </h1>
+                <p class="opacity-50 fs-6">
+                  Event Booking
+                </p>
+              </footer>
+            </aside>
+            <!-- testi -->
+            <section class="w-50">
+              <header>
+                <img src="./public/dompet.png" alt="dompet">
+              </header>
+              <footer class="ms-2 ">
+                <h1 class="fs-4 fw-bold">
+                  1,192,436
+                </h1>
+                <p class="opacity-50 fs-6">
+                  Payments
+                </p>
+              </footer>
+            </section>
+            <!-- two testi wrap -->
+          </article>
+        </aside>
+      </section>
+    </div>
+    <!-- end testi -->
     <!-- faq -->
-    <section id="testi" class="row px-5 py-5 d-flex justify-content-center  align-items-center ">
-      <aside class="col-lg-6 gap-5 ">
-        <h1 class="fw-semibold fs-1 lh-base text-body">
-          Lessons and insights from
-          <span class="bg-success text-white px-1 fw-bold "> 8 years</span>
-        </h1>
-        <p class="fw-medium opacity-50 pe-lg-5  ">
-          Where to grow your business as a photographer: site or social media?
-        </p>
-        <a class="bg-success px-3   py-2 text-decoration-none rounded   text-white " href="">
-          Get started
-        </a>
-      </aside>
-      <picture class="col-lg-6">
-        <img src="./public/Illustration.svg" class="w-75     h-auto " alt="hero">
-      </picture>
-    </section>
+    <div class="container mb-5">
+      <section id="faq" class="container row px-5 py-5 d-flex justify-content-center align-items-center ">
+        <header class="col-12">
+          <h1 class="fs-1 fw-bold mb-5 text-center">Faq</h1>
+        </header>
+        <aside class="col-12 flex flex-col justify-center items-center">
+          <details open class="w-full mb-2 ">
+            <summary>Who we are</summary>
+            <p>
+              We are a dynamic team of professionals committed to excellence and innovation. Our diverse backgrounds and
+              expertise
+              converge to create a collaborative environment that thrives on creativity and passion. Meet the faces
+              behind our
+              success, each bringing a unique perspective to the table.
+            </p>
+          </details>
+          <details class="w-full mb-2 ">
+            <summary>What sets us apart</summary>
+            <p>
+              At Next Consultancy, we redefine industry standards by delivering tailored solutions that transcend
+              expectations. Our
+              commitment to client satisfaction drives us to continually innovate and adapt. From strategic planning to
+              execution,
+              discover how our comprehensive services can elevate your business to new heights.
+            </p>
+          </details>
+          <details class="w-full mb-2 ">
+            <summary>
+              How we make a difference
+            </summary>
+            <p>
+              Our methodology blends precision and creativity, ensuring that every project is not just a task but an
+              opportunity for
+              transformation. We leverage cutting-edge technologies, industry insights, and a client-centric approach to
+              deliver
+              results that stand the test of time. Explore the art and science behind our success.
+            </p>
+          </details>
+        </aside>
+      </section>
+    </div>
     <!-- end faq -->
-    <!-- faq -->
-    <section id="faq" class="row px-5 py-5 d-flex justify-content-center  align-items-center ">
-      <aside class="col-lg-6 gap-5 ">
-        <h1 class="fw-semibold fs-1 lh-base text-body">
-          Lessons and insights from
-          <span class="bg-success text-white px-1 fw-bold "> 8 years</span>
-        </h1>
-        <p class="fw-medium opacity-50 pe-lg-5  ">
-          Where to grow your business as a photographer: site or social media?
-        </p>
-        <a class="bg-success px-3   py-2 text-decoration-none rounded   text-white " href="">
-          Get started
-        </a>
-      </aside>
-      <picture class="col-lg-6">
-        <img src="./public/Illustration.svg" class="w-75     h-auto " alt="hero">
-      </picture>
-    </section>
-    <!-- end faq -->
+    <!-- contact -->
+    <form class="container ">
+      <div class="mb-3">
+        <h1 class="fs-1 fw-semibold mb-4 ">Contact</h1>
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!-- contact -->
+
     <!-- footer -->
-    <div class="container mt-3 ">
-      <footer class="py-5">
+    <div class="bg-light  mt-3 ">
+      <footer class="py-5  container ">
         <div class="row">
           <div class="col-6 col-md-2 mb-3">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-            </ul>
-          </div>
+            <h5>Next</h5>
 
-          <div class="col-6 col-md-2 mb-3">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-            </ul>
           </div>
-
-          <div class="col-6 col-md-2 mb-3">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-            </ul>
-          </div>
-
-          <div class="col-md-5 offset-md-1 mb-3">
+          <div class="col-md-8 offset-md-1 mb-3">
             <form>
-              <h5>Subscribe to our newsletter</h5>
-              <p>Monthly digest of what's new and exciting from us.</p>
-              <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                <label for="newsletter1" class="visually-hidden">Email address</label>
-                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                <button class="btn btn-primary" type="button">Subscribe</button>
-              </div>
+              <h5>About Next Consultancy</h5>
+              <p>Next Consultancy isn't just a consultancy; it's a partner in your journey towards success. We
+                specialize in providing
+                strategic guidance and innovative solutions to propel your business forward.</p>
             </form>
           </div>
         </div>
