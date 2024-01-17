@@ -1,0 +1,34 @@
+.wrapper {
+  max-width: 500px;
+  background: #2D3250;
+  border-radius: 2rem;
+}
+
+button {
+  width: 85px;
+  height: 85px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  border-radius: 50%
+}
+
+button:hover {
+  opacity: 50%;
+  border: 1px solid #7077A1;
+  /* border-top-right-radius: 2rem; */
+}
+
+.operator {
+  color: #F6B17A;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  height: 5rem;
+  background: #7077A1;
+  border: none;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
