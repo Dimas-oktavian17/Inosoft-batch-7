@@ -4,7 +4,10 @@ const output = document.getElementById("output");
 const form = document.getElementById("calc_form");
 const operand_btns = document.querySelectorAll("button[data-type=operand]");
 const operator_btns = document.querySelectorAll("button[data-type=operator]");
-
+const darkMode = document.querySelector('.form-switch')
+darkMode.addEventListener("click", () => {
+  document.body.classList.toggle('dark')
+})
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 });
@@ -27,7 +30,8 @@ operand_btns.forEach((btn) => {
       is_operator = false;
       output.value = e.target.value;
     } else if (output.value.includes(".")) {
-      output.value = output.value + "" + e.target.value.replace(".", "");
+      output.value = output.value + "" + e.target.value.replace(/\.?0+$/, '')
+      // replace(".", "");
     } else {
       output.value = output.value + "" + e.target.value;
     }
@@ -48,13 +52,14 @@ operator_btns.forEach((btn) => {
         break;
       case "=":
         equation.push(output.value);
-        output.value = eval(equation.join(""));
+        output.value = eval(equation.join(""))
         equation = [];
         break;
       default:
         let last_item = equation[equation.length - 1];
         if (["/", "*", "+", "-"].includes(last_item) && is_operator) {
           equation.pop();
+          // equation.push(output.value);
           equation.push(e.target.value);
         } else {
           equation.push(output.value);
