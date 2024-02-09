@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite('resources/js/app.js')
+    <style>
+        .bg-Dark {
+            background-color: rgba(15, 15, 15, .98);
+        }
+    </style>
 </head>
 
-<body id="app">
+<body id="app" class="bg-Dark">
     <App></App>
 </body>
 
