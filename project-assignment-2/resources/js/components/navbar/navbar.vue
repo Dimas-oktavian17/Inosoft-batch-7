@@ -16,7 +16,7 @@ let hamburger = ref(false)
 </script>
 
 <template>
-    <nav class="container navbar navbar-expand-lg bg-black rounded fixed-top">
+    <nav class="container navbar navbar-expand-lg bg-blur rounded fixed-top">
         <div class="container">
             <a class="navbar-brand text-light" href="#">
                 <IconVue icon="mdi:food" />
@@ -34,10 +34,14 @@ let hamburger = ref(false)
                             {{ title }}
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
     </nav>
 </template>
-<style scoped></style>
+<style scoped>
+.bg-blur {
+    /*background-color: #0F0F0F;*/
+    backdrop-filter: blur(12px);
+}
+</style>
