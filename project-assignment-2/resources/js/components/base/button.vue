@@ -1,5 +1,5 @@
 <script setup>
-defineEmits(['deleteList'])
+defineEmits(['deleteList',])
 const props = defineProps(
     {
         title: {
