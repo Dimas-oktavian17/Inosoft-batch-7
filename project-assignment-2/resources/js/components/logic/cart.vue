@@ -1,14 +1,16 @@
 <script setup>
 import { reactive, ref, toRefs, computed } from 'vue';
 defineProps(['TitleMenu', 'CheckoutMenu'])
-const listMenu = reactive([
+const CheckoutData = ref([])
+const listMenu = ref([
     {
         logo: 'game-icons:fast-noodles',
         title: 'Mie Gelas',
         deskripsi: 'Mie yang penuh cita rasa, harga terjangkau. Nostalgia.',
         price: 3900,
         stok: 10,
-        checkout: 'Add to cart'
+        checkout: 'Add to cart',
+        status: true
     },
     {
         logo: 'fluent-emoji-high-contrast:cut-of-meat',
@@ -16,7 +18,8 @@ const listMenu = reactive([
         deskripsi: `Jangan banya banyak, udah pasti enak. Sebaiknya jangan gegabah.`,
         price: 10000,
         stok: 80,
-        checkout: 'Add to cart'
+        checkout: 'Add to cart',
+        status: true
     },
     {
         logo: 'bxs:coffee-bean',
@@ -25,10 +28,60 @@ const listMenu = reactive([
                     Meskipun kadang basi, pengalaman.`,
         price: 1500,
         stok: 3,
-        checkout: 'Add to cart'
+        checkout: 'Add to cart',
+        status: true
     }
 ])
 
+const handleProduct = (title, price, stok) => {
+    const productMenu = listMenu.value.find((item) => item.title === title)
+    if (stok > 0) {
+        productMenu.stok--
+        CheckoutData.value.push({
+            nama: title,
+            harga: Number(price),
+            jumlah: Number(1)
+        })
+
+        productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
+    }
+}
+const listCheckout = computed(() => {
+    return CheckoutData.value.reduce((acc, item) => {
+        const existingItem = acc.find(i => i.nama === item.nama);
+        if (existingItem) {
+            // update jumlah & harga
+            existingItem.jumlah += item.jumlah;
+            existingItem.harga += item.harga;
+        } else {
+            // If the item is not in the accumulator, add it
+            acc.push({ ...item });
+        }
+        return acc;
+    }, []);
+})
+const deleteProduct = (nama, harga, jumlah, index) => {
+    const productMenu = CheckoutData.value.find((item) => item.nama === nama);
+    const listMenuItem = listMenu.value.find((item) => item.title === nama);
+
+    if (productMenu && listMenuItem) {
+        // update jumlah & harga
+        productMenu.jumlah -= 1;
+        productMenu.harga -= listMenuItem.price;
+
+        // update stok in listMenu
+        listMenuItem.stok += jumlah;
+
+        // remove the product from CheckoutData if jumlah is 0
+        if (productMenu.jumlah === 0) {
+            CheckoutData.value = CheckoutData.value.filter((item) => item.nama !== nama);
+        }
+    } else {
+        console.log('Product not found');
+    }
+
+    console.log(productMenu);
+}
 const checkoutHandler = () => console.log('tes ah');
 </script>
 
@@ -42,7 +95,7 @@ const checkoutHandler = () => console.log('tes ah');
     <!-- list section -->
     <article id="menu"
         class="row pt-5 text-light flex-column  flex-lg-row   d-flex justify-content-center  align-items-center ">
-        <div v-for="({ title, logo, deskripsi, price, stok, checkout, index }) in listMenu" :key="index"
+        <div v-for="({ title, logo, deskripsi, price, stok, checkout, status, index }) in listMenu" :key="index"
             class="col-lg-4 pt-5 pt-lg-0 ">
             <div class="card bg-dark">
                 <div class="card-body">
@@ -54,7 +107,8 @@ const checkoutHandler = () => console.log('tes ah');
                     <p class="card-text text-light">
                         Stok: {{ stok }} || Price: Rp.{{ price }}
                     </p>
-                    <BtnVue :title="checkout" styleBtn="btn btn-secondary" />
+                    <BtnVue :disabled="status === false" :title="checkout" styleBtn="btn btn-secondary"
+                        @click="handleProduct(title, price, stok)" />
                 </div>
             </div>
         </div>
@@ -77,13 +131,14 @@ const checkoutHandler = () => console.log('tes ah');
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-for="({ nama, harga, jumlah, index }) in listCheckout" :key="index">
                 <tr>
-                    <th scope="row">mie</th>
-                    <td>1</td>
-                    <td>Rp.1000</td>
+                    <th scope="row">{{ nama }}</th>
+                    <td>{{ jumlah }}</td>
+                    <td>Rp.{{ harga }}</td>
                     <td>
-                        <BtnVue title="Delete" styleBtn="btn btn-danger" />
+                        <BtnVue title="Delete All" styleBtn="btn btn-danger"
+                            @deleteList="deleteProduct(nama, harga, jumlah, index)" />
                     </td>
                 </tr>
             </tbody>
