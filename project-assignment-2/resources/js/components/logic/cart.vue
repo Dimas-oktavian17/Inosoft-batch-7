@@ -58,22 +58,25 @@ const listCheckout = computed(() => {
             acc.push({ ...item });
         }
         return acc;
-    }, []);
+    }, [])
 })
-const deleteProduct = (nama, harga, jumlah, index) => {
+const deleteProduct = (nama, harga, jumlah, status, index) => {
     const productMenu = CheckoutData.value.find((item) => item.nama === nama);
     const listMenuItem = listMenu.value.find((item) => item.title === nama);
 
     if (productMenu && listMenuItem) {
         // update jumlah & harga
-        productMenu.jumlah -= 1;
-        productMenu.harga -= listMenuItem.price;
+        productMenu.jumlah -= productMenu.jumlah;
+        // productMenu.jumlah;
+        productMenu.harga -= harga
 
         // update stok in listMenu
-        listMenuItem.stok += jumlah;
+        listMenuItem.stok += jumlah
+        // jumlah;
 
         // remove the product from CheckoutData if jumlah is 0
         if (productMenu.jumlah === 0) {
+            listMenuItem.status = true
             CheckoutData.value = CheckoutData.value.filter((item) => item.nama !== nama);
         }
     } else {
@@ -82,6 +85,32 @@ const deleteProduct = (nama, harga, jumlah, index) => {
 
     console.log(productMenu);
 }
+const deleteProduc = (nama) => {
+    const productMenuIndex = CheckoutData.value.findIndex((item) => item.nama === nama);
+    const listMenuItem = listMenu.value.find((item) => item.title === nama);
+
+    if (productMenuIndex !== -1 && listMenuItem) {
+        // Get the product from CheckoutData
+        const productMenu = CheckoutData.value[productMenuIndex];
+
+        // Decrease the quantity of the product by 1
+        productMenu.jumlah -= 1;
+        // Decrease the total price of the product by its unit price
+        productMenu.harga -= listMenuItem.price;
+
+        // Increase the stock of the product in listMenu by 1
+        listMenuItem.stok += 1;
+
+        // If the quantity of the product becomes 0, remove it from the cart
+        if (productMenu.jumlah === 0) {
+            listMenuItem.status = true;
+            CheckoutData.value.splice(productMenuIndex, 1);
+        }
+    } else {
+        console.log('Product not found');
+    }
+}
+
 const checkoutHandler = () => console.log('tes ah');
 </script>
 
@@ -131,14 +160,15 @@ const checkoutHandler = () => console.log('tes ah');
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
-            <tbody v-for="({ nama, harga, jumlah, index }) in listCheckout" :key="index">
+            <tbody v-for="({ nama, harga, jumlah, status, index }) in listCheckout" :key="index">
                 <tr>
                     <th scope="row">{{ nama }}</th>
                     <td>{{ jumlah }}</td>
                     <td>Rp.{{ harga }}</td>
                     <td>
                         <BtnVue title="Delete All" styleBtn="btn btn-danger"
-                            @deleteList="deleteProduct(nama, harga, jumlah, index)" />
+                            @deleteList="deleteProduct(nama, harga, jumlah, status, index)" />
+                        <BtnVue title="Delete one" styleBtn="btn btn-danger" @deleteList="deleteProduc(nama)" />
                     </td>
                 </tr>
             </tbody>
