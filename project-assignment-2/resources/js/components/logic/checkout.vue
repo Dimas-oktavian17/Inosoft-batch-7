@@ -1,3 +1,7 @@
-<script setup></script>
+<script setup>
+defineEmits(['handleCheckout'])
+</script>
 
-<template></template>
+<template>
+    <BtnVue @click="$emit('handleCheckout')" title="Checkout" styleBtn="btn btn-success " />
+</template>

@@ -1,7 +1,6 @@
 <script setup>
-import { reactive, toRefs, computed } from 'vue';
-defineProps(['title'])
-
+import { reactive, ref, toRefs, computed } from 'vue';
+defineProps(['TitleMenu', 'CheckoutMenu'])
 const listMenu = reactive([
     {
         logo: 'game-icons:fast-noodles',
@@ -30,13 +29,14 @@ const listMenu = reactive([
     }
 ])
 
+const checkoutHandler = () => console.log('tes ah');
 </script>
 
 <template>
     <!-- menu section -->
     <aside class="row text-light pt-10">
         <div class="col-12 text-center ">
-            <header class="text-light h1 fw-semibold">{{ title }}</header>
+            <header class="text-light h1 fw-semibold">{{ TitleMenu }}</header>
         </div>
     </aside>
     <!-- list section -->
@@ -59,4 +59,41 @@ const listMenu = reactive([
             </div>
         </div>
     </article>
+    <!--  header -->
+    <aside class="row text-light pt-10">
+        <div class="col-12 text-center ">
+            <header class="text-light h1 fw-semibold">{{ CheckoutMenu }}</header>
+        </div>
+    </aside>
+    <!-- list section -->
+    <article id="menu"
+        class="container row pt-5 text-light flex-column  flex-lg-row   d-flex justify-content-center  align-items-center ">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">mie</th>
+                    <td>1</td>
+                    <td>Rp.1000</td>
+                    <td>
+                        <BtnVue title="Delete" styleBtn="btn btn-danger" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <CheckoutVue @handleCheckout="checkoutHandler" />
+    </article>
 </template>
+
+<style scoped>
+.pt-10 {
+    padding-top: 10rem;
+}
+</style>

@@ -61,8 +61,8 @@ const listMenu = reactive([
             </div>
         </article>
         <article class="pt-10">
-            <CartVue title="Semua Menu" />
-            <CheckoutVue />
+            <CartVue TitleMenu="Semua Menu" CheckoutMenu="Keranjang Belanja" />
+
         </article>
     </DefaultLayout>
 </template>
