@@ -1,4 +1,5 @@
 <script setup>
+defineEmits(['deleteList'])
 const props = defineProps(
     {
         title: {
@@ -6,8 +7,11 @@ const props = defineProps(
             required: true
         },
         styleBtn: {
-            type: String,
+            type: [String, Array],
             required: true
+        },
+        lock: {
+            type: String,
         },
     },
 )
@@ -15,7 +19,7 @@ const { title, styleBtn } = props
 </script>
 
 <template>
-    <button type="button" :class="styleBtn">
+    <button @click="$emit('deleteList')" type="button" :class="styleBtn" :disabled="lock">
         {{ title }}
     </button>
 </template>
