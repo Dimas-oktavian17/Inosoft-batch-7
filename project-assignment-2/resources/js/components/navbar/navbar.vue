@@ -1,17 +1,7 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
+import { navItem } from '@/composable/component.js'
 defineProps(['title'])
-const navItem = reactive([
-    {
-        title: 'Home', style: 'nav-link text-light active', link: '#'
-    },
-    {
-        title: 'Menu', style: 'nav-link text-light', link: '#menu'
-    },
-    {
-        title: 'Checkout', style: 'nav-link text-light', link: '#checkout'
-    },
-])
 let hamburger = ref(false)
 </script>
 

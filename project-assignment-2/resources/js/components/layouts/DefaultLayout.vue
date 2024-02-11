@@ -9,7 +9,7 @@
     <main class="container d-flex flex-column  align-items-center justify-content-between " style="padding-top: 10rem;">
         <slot></slot>
     </main>
-    <footer>
-
+    <footer style="padding-top: 15rem;">
+        <FooterVue title="Pakcik, Inc" />
     </footer>
 </template>

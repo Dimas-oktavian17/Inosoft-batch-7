@@ -14,7 +14,7 @@
 </head>
 
 <body id="app" class="bg-Dark">
-    <App></App>
+    <App />
 </body>
 
 </html>

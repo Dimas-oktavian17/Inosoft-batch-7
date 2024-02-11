@@ -1,28 +1,9 @@
 <script setup>
-import { reactive } from 'vue';
-const listMenu = reactive([
-    {
-        logo: 'game-icons:fast-noodles',
-        title: 'Mie Gelas',
-        deskripsi: 'Mie yang penuh cita rasa, harga terjangkau. Nostalgia.'
-    },
-    {
-        logo: 'fluent-emoji-high-contrast:cut-of-meat',
-        title: 'Daging Wagyu A5',
-        deskripsi: `Jangan banya banyak, udah pasti enak. Sebaiknya jangan gegabah.`
-    },
-    {
-        logo: 'bxs:coffee-bean',
-        title: 'Kopikap',
-        deskripsi: `Dari biji kopi pilihan, dan cita rasa yang berkualitas.
-                    Meskipun kadang basi, pengalaman.`
-    }
-])
+import { listMenu } from '@/composable/component.js'
 </script>
 
 <template>
     <DefaultLayout>
-        <!-- <BtnVue title="ok" styleBtn="btn btn-primary" /> -->
         <!-- hero section -->
         <aside class="row text-light ">
             <div class="col-lg-6">
@@ -60,9 +41,8 @@ const listMenu = reactive([
                 </div>
             </div>
         </article>
-        <article class="pt-10">
+        <article class="pt-10" id="checkout">
             <CartVue TitleMenu="Semua Menu" CheckoutMenu="Keranjang Belanja" />
-
         </article>
     </DefaultLayout>
 </template>
