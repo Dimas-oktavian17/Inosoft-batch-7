@@ -14,7 +14,8 @@
 </head>
 
 <body id="app" class="bg-Dark">
-    <App />
+    <!-- <App /> -->
+    <router-view></router-view>
 </body>
 
 </html>
