@@ -24,14 +24,14 @@ const dataProducts = computed(() => Products.getters.getCart)
                     <td>{{ jumlah }}</td>
                     <td>Rp.{{ harga }}</td>
                     <td>
-                        <BtnVue title="Delete All" styleBtn="btn btn-danger me-lg-2"
+                        <!-- <BtnVue title="Delete All" styleBtn="btn btn-danger me-lg-2"
                             @deleteList="deleteProduct(nama, harga, jumlah)" />
                         <span class="text-dark ">-</span>
-                        <BtnVue title="Delete one" styleBtn="btn btn-danger" @deleteList="deleteProductOne(nama)" />
+                        <BtnVue title="Delete one" styleBtn="btn btn-danger" @deleteList="deleteProductOne(nama)" /> -->
                     </td>
                 </tr>
             </tbody>
-            <tbody>
+            <!-- <tbody>
                 <tr>
                     <th scope="row">Total:</th>
                     <td></td>
@@ -39,7 +39,7 @@ const dataProducts = computed(() => Products.getters.getCart)
                     <td></td>
                 </tr>
             </tbody>
-            <CheckoutVue :total="TotalCheckout" />
+            <CheckoutVue :total="TotalCheckout" /> -->
         </table>
     </article>
 </template>

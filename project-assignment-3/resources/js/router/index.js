@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PageProducts from 'views/Page-Products.vue'
+import { Products } from '../store/productStore';
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [

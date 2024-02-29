@@ -1,35 +1,13 @@
 <script setup>
 import { reactive, ref, toRefs, computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
 import { Products } from '../../store/productStore';
 defineProps(['TitleMenu', 'CheckoutMenu'])
 const CheckoutData = ref([])
 import { listMenu } from '@/composable/component.js'
-const handleProduct = (title, price, stok) => {
-    Products.dispatch("handleProduct", { title, price, stok })
-    // const productMenu = listMenu.value.find((item) => item.title === title)
-    // if (stok > 0) {
-    //     productMenu.stok--
-    //     CheckoutData.value.push({
-    //         nama: title,
-    //         harga: Number(price),
-    //         jumlah: Number(1)
-    //     })
-    //     productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
-    // }
-}
-const handleProductAll = (title, price, stok) => {
-    const productMenu = listMenu.value.find((item) => item.title === title)
-    if (stok > 0) {
-        productMenu.stok -= stok
-        CheckoutData.value.push({
-            nama: title,
-            harga: Number(price) * Number(stok),
-            jumlah: Number(stok)
-        })
-        productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
-    }
-}
+const handleProduct = (title, price, stok) => Products.dispatch("handleProduct", { title, price, stok })
+
+const handleProductAll = (title, price, stok) => Products.dispatch("handleProductAll", { title, price, stok })
+
 const listCheckout = computed(() => {
     return CheckoutData.value.reduce((acc, item) => {
         const existingItem = acc.find(i => i.nama === item.nama);
@@ -95,10 +73,14 @@ const TotalCheckout = computed(() => CheckoutData.value.reduce((acc, item) => ac
 
 const dataProducts = computed(() => Products.getters.getData)
 onMounted(async () => {
-    try {
-        await Products.dispatch("getAllData")
-    } catch (error) {
-        console.error(error);
+    // / Check if data is already loaded before dispatching the action
+    if (Products.getters.getData.length === 0) {
+        try {
+            console.log(Products.getters.getData.length);
+            Products.dispatch("getAllData");
+        } catch (error) {
+            console.error(error);
+        }
     }
 })
 </script>
