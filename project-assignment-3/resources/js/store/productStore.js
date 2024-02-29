@@ -22,6 +22,13 @@ export const Products = createStore({
                 harga: Number(price),
                 jumlah: Number(1)
             })
+        },
+        UPDATE_CARTALL(state, { title, price, stok }) {
+            state.cart.push({
+                nama: title,
+                harga: Number(price) * Number(stok),
+                jumlah: Number(stok)
+            })
         }
     },
     actions: {
@@ -34,7 +41,7 @@ export const Products = createStore({
                 console.error(error);
             }
         },
-        async handleProduct(context, { title, price, stok }) {
+        handleProduct(context, { title, price, stok }) {
             const productMenu = this.getters.getData.find((item) => item.title === title)
             console.log(productMenu);
             if (stok > 0) {
@@ -43,5 +50,14 @@ export const Products = createStore({
                 productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
             }
         },
+        handleProductAll(context, { title, price, stok }) {
+            const productMenu = this.getters.getData.find((item) => item.title === title)
+            console.log(productMenu);
+            if (stok > 0) {
+                productMenu.stok -= stok
+                context.commit("UPDATE_CARTALL", { title, price, stok });
+                productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
+            }
+        }
     },
 });
