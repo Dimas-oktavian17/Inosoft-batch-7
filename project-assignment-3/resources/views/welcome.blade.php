@@ -7,9 +7,9 @@
     <title>Document</title>
     @vite('resources/js/app.js')
     <style>
-        /* .bg-Dark {
+        .bg-Dark {
             background-color: rgba(15, 15, 15, .98);
-        } */
+        }
     </style>
 </head>
 

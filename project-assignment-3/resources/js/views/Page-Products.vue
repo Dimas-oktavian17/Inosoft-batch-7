@@ -1,5 +1,4 @@
 <script setup>
-import { Products } from '../store/productStore';
 import { listMenu } from '@/composable/component.js'
 </script>
 <template>

@@ -1,19 +1,22 @@
 <script setup>
-import { reactive, ref, toRefs, computed } from 'vue';
+import { reactive, ref, toRefs, computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { Products } from '../../store/productStore';
 defineProps(['TitleMenu', 'CheckoutMenu'])
 const CheckoutData = ref([])
 import { listMenu } from '@/composable/component.js'
 const handleProduct = (title, price, stok) => {
-    const productMenu = listMenu.value.find((item) => item.title === title)
-    if (stok > 0) {
-        productMenu.stok--
-        CheckoutData.value.push({
-            nama: title,
-            harga: Number(price),
-            jumlah: Number(1)
-        })
-        productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
-    }
+    Products.dispatch("handleProduct", { title, price, stok })
+    // const productMenu = listMenu.value.find((item) => item.title === title)
+    // if (stok > 0) {
+    //     productMenu.stok--
+    //     CheckoutData.value.push({
+    //         nama: title,
+    //         harga: Number(price),
+    //         jumlah: Number(1)
+    //     })
+    //     productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
+    // }
 }
 const handleProductAll = (title, price, stok) => {
     const productMenu = listMenu.value.find((item) => item.title === title)
@@ -89,6 +92,15 @@ const deleteProductOne = (nama) => {
     }
 }
 const TotalCheckout = computed(() => CheckoutData.value.reduce((acc, item) => acc + item.harga, 0))
+
+const dataProducts = computed(() => Products.getters.getData)
+onMounted(async () => {
+    try {
+        await Products.dispatch("getAllData")
+    } catch (error) {
+        console.error(error);
+    }
+})
 </script>
 
 <template>
@@ -100,8 +112,8 @@ const TotalCheckout = computed(() => CheckoutData.value.reduce((acc, item) => ac
     </aside>
     <!-- list section -->
     <article id="menu"
-        class="row pt-5 text-light flex-column  flex-lg-row   d-flex justify-content-center  align-items-center ">
-        <div v-for="({ title, logo, deskripsi, price, stok, checkout, status, index }) in listMenu" :key="index"
+        class="row pt-5 text-light flex-column  flex-lg-row   d-flex justify-content-center align-items-center ">
+        <div v-for="({ title, logo, deskripsi, price, stok, checkout, status, index }) in dataProducts" :key="index"
             class="col-lg-4 pt-5 pt-lg-0 ">
             <div class="card bg-dark">
                 <div class="card-body">
