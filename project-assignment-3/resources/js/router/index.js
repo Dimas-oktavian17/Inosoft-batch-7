@@ -19,6 +19,22 @@ const router = createRouter({
                 title: 'Cart-Products'
             }
         },
+        {
+            path: '/Learn',
+            name: 'Cart-Products',
+            component: () => import('views/LearnFlow.vue'),
+            meta: {
+                title: 'Cart-Products'
+            },
+        },
+        {
+            path: '/Result',
+            name: 'res',
+            component: () => import('views/result.vue'),
+            meta: {
+                title: 'res'
+            },
+        },
         // will match everything and put it under `$route.params.pathMatch`
         { path: '/:pathMatch(.*)*', name: 'NotFound', component: import('views/NotFound.vue') },
     ]
