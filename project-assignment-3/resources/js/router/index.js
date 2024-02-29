@@ -14,17 +14,17 @@ const router = createRouter({
         {
             path: '/Cart-Products',
             name: 'Cart-Products',
-            component: () => import('views/Cart-Products.vue'),
+            component: () => import('views/CartProducts.vue'),
             meta: {
                 title: 'Cart-Products'
             }
         },
         {
             path: '/Learn',
-            name: 'Cart-Products',
+            name: 'learn',
             component: () => import('views/LearnFlow.vue'),
             meta: {
-                title: 'Cart-Products'
+                title: 'learn'
             },
         },
         {

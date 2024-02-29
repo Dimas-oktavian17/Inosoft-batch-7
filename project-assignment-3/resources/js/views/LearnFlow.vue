@@ -1,32 +1,3 @@
-<!-- <script setup>
-import axios from 'axios';
-import { computed, ref } from 'vue'
-import { Products } from '../store/productStore';
-const name = ref('')
-const getData = async () => Products.dispatch("getAllData")
-const postData = async () => {
-    let payload = {
-        username: name.value
-    }
-    Products.dispatch("postData", payload)
-
-}
-const data = computed(() => Products.state.data)
-</script>
-<template>
-    <button class="btn btn-primary" @click="getData">
-        Get Data
-    </button>
-    <input type="text" v-model="name" />
-    <button class="btn btn-primary" @click="postData">
-        Get Data
-    </button>
-    <ul>
-        <li v-for="item in data.data" :key="item.id">
-            {{ item.name }} (ID: {{ item.id }})
-        </li>
-    </ul>
-</template> -->
 <script setup>
 import axios from 'axios';
 import { computed, ref } from 'vue'
@@ -83,7 +54,7 @@ const Producssss = computed(() => Productss.value.flat())
 </script>
 
 <template>
-    <div>
+    <div class="text-white">
         <RouterLink to="/Result">
             Go to Cart
         </RouterLink>

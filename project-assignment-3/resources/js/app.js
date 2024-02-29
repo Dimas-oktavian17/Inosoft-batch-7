@@ -10,8 +10,8 @@ import footer from '@/footer/footer.vue'
 import cart from '@/logic/cart.vue'
 import checkout from '@/logic/checkout.vue'
 // * vuex stores
-import { Carts } from 'stores/cartStore.js';
-import { Products } from 'stores/productStore.js';
+// import { Carts } from 'stores/cartStore.js';
+// import { Products } from 'stores/productStore.js';
 const app = createApp()
 app.component('IconVue', Icon)
     .component('DefaultLayout', DefaultLayout)
@@ -22,6 +22,6 @@ app.component('IconVue', Icon)
     .component('CartVue', cart)
     .component('CheckoutVue', checkout)
     .use(router)
-    .use(Carts)
-    .use(Products)
+    // .use(Carts)
+    // .use(Products)
     .mount('#app')

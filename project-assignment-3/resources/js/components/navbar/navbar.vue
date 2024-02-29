@@ -1,8 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { navItem } from '@/composable/component.js'
 defineProps(['title'])
 let hamburger = ref(false)
+import { Products } from '../../store/productStore';
+const CartTotals = computed(() => Products.getters.getCart.length)
 </script>
 
 <template>
@@ -12,19 +14,44 @@ let hamburger = ref(false)
                 <IconVue icon="mdi:food" />
                 {{ title }}
             </a>
-            <button @click="hamburger = !hamburger" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <RouterLink to="Cart-Products" class="d-flex d-lg-none   justify-content-center align-items-center">
+                <div class="position-relative py-2">
+                    <div class="position-absolute top-0 start-50 ">
+                        <p style="width: 4px; height: 4px;"
+                            class="d-flex justify-content-center rounded-5 bg-body p-2 align-items-center text-danger">
+                            {{ CartTotals }}
+                        </p>
+                    </div>
+                    <IconVue icon="ion:cart-outline" class="text-light " width="30px" />
+                </div>
+            </RouterLink>
+            <button @click="hamburger = !hamburger" class="d-none navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <IconVue icon="charm:cross" class="text-light " v-if="hamburger" />
                 <IconVue icon="quill:hamburger" class="text-light " v-else />
             </button>
-            <div :class="{ 'collapse ': !hamburger, 'navbar-collapse': true }" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item" v-for="({ title, style, link, index }) in navItem" :key="index">
-                        <a :class="style" :href="link">
-                            {{ title }}
-                        </a>
-                    </li>
-                </ul>
+            <div class="d-none d-lg-block">
+                <div :class="{ 'collapse': !hamburger, 'navbar-collapse': true }" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" v-for="({ title, style, link, index }) in navItem" :key="index">
+                            <a :class="style" :href="link">
+                                {{ title }}
+                            </a>
+                        </li>
+                        <RouterLink to="Cart-Products" class="d-lg-flex d-none  justify-content-center align-items-center">
+                            <div class="position-relative py-2">
+                                <div class="position-absolute top-0 start-50 ">
+                                    <p style="width: 4px; height: 4px;"
+                                        class="d-flex justify-content-center rounded-5 bg-body p-2 align-items-center text-danger">
+                                        {{ CartTotals }}
+                                    </p>
+                                </div>
+                                <IconVue icon="ion:cart-outline" class="text-light " width="30px" />
+                            </div>
+                        </RouterLink>
+
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
