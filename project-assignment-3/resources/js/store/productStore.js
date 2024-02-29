@@ -29,6 +29,9 @@ export const Products = createStore({
                 harga: Number(price) * Number(stok),
                 jumlah: Number(stok)
             })
+        },
+        DELETE_ALL_PRODUCTS(state, { nama, harga, jumlah }) {
+            state.cart = state.cart.filter((item) => item.nama !== nama);
         }
     },
     actions: {
@@ -58,6 +61,33 @@ export const Products = createStore({
                 context.commit("UPDATE_CARTALL", { title, price, stok });
                 productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
             }
+        },
+        // CartProducts
+        deleteProduct(context, { nama, harga, jumlah }) {
+            const productMenu = this.getters.getCart.find((item) => item.nama === nama)
+            const listMenuItem = this.getters.getData.find((item) => item.title === nama);
+            console.log(productMenu.nama === listMenuItem.title ? true : false);
+            if (productMenu && listMenuItem) {
+                // update jumlah & harga
+                productMenu.jumlah -= jumlah;
+                // productMenu.jumlah;
+                productMenu.harga -= harga
+
+                // update stok in listMenu
+                listMenuItem.jumlah += jumlah
+                // jumlah;
+
+                // remove the product from CheckoutData if jumlah is 0
+                if (productMenu.jumlah === 0) {
+                    listMenuItem.status = true
+                    context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah })
+                    // this.getters.getCart = this.getters.getCart.filter((item) => item.nama !== nama);
+                }
+            } else {
+                console.log('Product not found');
+            }
+
+            // console.log(productMenu);
         }
     },
 });

@@ -5,7 +5,6 @@ defineProps(['TitleMenu', 'CheckoutMenu'])
 const CheckoutData = ref([])
 import { listMenu } from '@/composable/component.js'
 const handleProduct = (title, price, stok) => Products.dispatch("handleProduct", { title, price, stok })
-
 const handleProductAll = (title, price, stok) => Products.dispatch("handleProductAll", { title, price, stok })
 
 const listCheckout = computed(() => {
