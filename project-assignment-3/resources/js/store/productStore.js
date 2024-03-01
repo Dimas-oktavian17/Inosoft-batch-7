@@ -1,4 +1,4 @@
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import axios from 'axios';
 import { createStore } from 'vuex';
 
@@ -52,7 +52,6 @@ export const Products = createStore({
             state.cart = state.cart.filter((item) => item.nama !== nama);
         },
         DELETE_PRODUCTS(state, { nama }) {
-            // state.cart.splice(nama, 1);
             state.cart.splice(nama, 1);
         }
     },
@@ -102,10 +101,8 @@ export const Products = createStore({
                 // remove the product from CheckoutData if jumlah is 0
                 if (productMenu.jumlah === 0) {
                     listMenuItem.status = true;
-                    context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah });
                     // Remove the item from the cart
-                    // context.state.cart.splice(productMenuIndex, 1);
-                    // context.state.cart = context.state.cart.filter((item) => item.nama !== nama);
+                    context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah });
                 }
             } else {
                 console.log('Product not found');
@@ -125,7 +122,6 @@ export const Products = createStore({
                 listMenuItem.stok += 1;
                 // If the quantity of the product becomes 0, remove it from the cart
                 if (productMenu.jumlah === 0) {
-                    // context.commit("DELETE_PRODUCTS", { nama });
                     context.state.cart.splice(productMenuIndex, 1);
                 }
                 // active button add cart again

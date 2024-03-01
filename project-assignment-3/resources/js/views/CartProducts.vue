@@ -1,7 +1,6 @@
 <script setup>
 import { Products } from '../store/productStore';
 import { computed, ref } from 'vue'
-const dataProducts = computed(() => Products.getters.getCart)
 const realCheckout = computed(() => Products.getters.listCheckout)
 const TotalCheckout = computed(() => Products.getters.TotalCheckout)
 const ConditionsList = computed(() => Products.getters.listCheckout.length)
