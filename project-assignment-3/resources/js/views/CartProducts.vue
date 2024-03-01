@@ -4,52 +4,17 @@ import { computed, ref } from 'vue'
 const dataProducts = computed(() => Products.getters.getCart)
 const realCheckout = computed(() => Products.getters.listCheckout)
 const TotalCheckout = computed(() => Products.getters.TotalCheckout)
+const ConditionsList = computed(() => Products.getters.listCheckout.length)
 const deleteProduct = (nama, harga, jumlah) => Products.dispatch("deleteProduct", { nama, harga, jumlah })
 const deleteProductOne = (nama) => Products.dispatch("deleteProductOne", { nama })
 </script>
 <template>
     <DefaultLayout>
-        <RouterLink to="/">
-            Back
-        </RouterLink>
-        <!-- <article id="menu"
-            class="container row pt-5 text-light flex-column  flex-lg-row d-flex justify-content-center  align-items-center ">
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
-                <tbody v-for="({ nama, harga, jumlah, index }) in realCheckout" :key="index">
-                    <tr>
-                        <th scope="row">{{ nama }}</th>
-                        <td>{{ jumlah }}</td>
-                        <td>Rp.{{ harga }}</td>
-                        <td>
-                            <BtnVue title="Delete All" styleBtn="btn btn-danger me-lg-2"
-                                @deleteList="deleteProduct(nama, harga, jumlah)" />
-                            <span class="text-dark ">-</span>
-                            <BtnVue title="Delete one" styleBtn="btn btn-danger" @deleteList="deleteProductOne(nama)" />
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                        <th scope="row">Total:</th>
-                        <td></td>
-                        <td>Rp.{{ TotalCheckout }}</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-                <CheckoutVue :total="TotalCheckout" />
-            </table>
-        </article> -->
+        <BreadCrumb />
         <article
             class="container row pt-5 text-light  d-flex  flex-column justify-content-center  align-items-center flex-lg-row justify-content-lg-start    align-items-lg-start   ">
-            <div class="col-lg-6 col-12">
+            <!-- list cart -->
+            <div class="col-lg-6 col-12" v-if="ConditionsList !== 0">
                 <div class="card bg-dark mb-3" v-for="({ nama, harga, jumlah, logo, index }) in realCheckout" :key="index">
                     <div class="row g-0">
                         <div class="col-md-4 d-flex  justify-content-center  align-items-center">
@@ -76,6 +41,14 @@ const deleteProductOne = (nama) => Products.dispatch("deleteProductOne", { nama 
                     </div>
                 </div>
             </div>
+            <!-- ilustraion not found -->
+            <div class="col-lg-6 col-12" v-else>
+                <div class="mb-3 d-flex flex-column justify-content-center align-items-center">
+                    <h5>Your Shopping Cart Is Null</h5>
+                    <IconVue icon="mingcute:sad-fill" class="text-light NotFound" width="250px" height="250px" />
+                </div>
+            </div>
+            <!-- Checkout -->
             <div class="col-lg-6  col-12 position-sticky " style="top:150px ;">
                 <div class="card w-full bg-dark ">
                     <div class="card-body text-light ">
@@ -95,6 +68,20 @@ const deleteProductOne = (nama) => Products.dispatch("deleteProductOne", { nama 
 <style lang="css" scoped>
 .CustomCard {
     max-width: 240px;
+}
+
+.NotFound {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.NotFound:hover {
+    transform: rotate(45deg);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 1024px) {

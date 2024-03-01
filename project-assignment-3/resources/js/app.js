@@ -9,9 +9,9 @@ import navbar from '@/navbar/navbar.vue'
 import footer from '@/footer/footer.vue'
 import cart from '@/logic/cart.vue'
 import checkout from '@/logic/checkout.vue'
-// * vuex stores
-// import { Carts } from 'stores/cartStore.js';
-// import { Products } from 'stores/productStore.js';
+import breadcrumb from '@/breadcrumb/breadcrumb.vue'
+
+
 const app = createApp()
 app.component('IconVue', Icon)
     .component('DefaultLayout', DefaultLayout)
@@ -21,7 +21,7 @@ app.component('IconVue', Icon)
     .component('FooterVue', footer)
     .component('CartVue', cart)
     .component('CheckoutVue', checkout)
+    .component('CheckoutVue', checkout)
+    .component('BreadCrumb', breadcrumb)
     .use(router)
-    // .use(Carts)
-    // .use(Products)
     .mount('#app')
