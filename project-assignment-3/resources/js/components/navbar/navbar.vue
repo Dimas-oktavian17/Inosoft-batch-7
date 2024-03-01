@@ -4,7 +4,8 @@ import { navItem } from '@/composable/component.js'
 defineProps(['title'])
 let hamburger = ref(false)
 import { Products } from '../../store/productStore';
-const CartTotals = computed(() => Products.getters.getCart.length)
+// const CartTotals = computed(() => Products.getters.getCart.length)
+const CartTotals = computed(() => Products.getters.listCheckout.length)
 </script>
 
 <template>
