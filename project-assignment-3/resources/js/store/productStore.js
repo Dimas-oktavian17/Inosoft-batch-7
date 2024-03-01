@@ -98,16 +98,17 @@ export const Products = createStore({
                 // remove the product from CheckoutData if jumlah is 0
                 if (productMenu.jumlah === 0) {
                     listMenuItem.status = true;
-                    context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah });
+                    // context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah });
                     // Remove the item from the cart
                     context.state.cart.splice(productMenuIndex, 1);
+                    context.state.cart = context.state.cart.filter((item) => item.nama !== nama);
                 }
             } else {
                 console.log('Product not found');
             }
         },
         deleteProductOne(context, { nama }) {
-            const productMenuIndex = this.getters.listCheckout.findIndex((item) => item.nama === nama);
+            const productMenuIndex = this.getters.getCart.findIndex((item) => item.nama === nama);
             const listMenuItem = this.getters.getData.find((item) => item.title === nama);
             if (productMenuIndex !== -1 && listMenuItem) {
                 // Get the product from CheckoutData
