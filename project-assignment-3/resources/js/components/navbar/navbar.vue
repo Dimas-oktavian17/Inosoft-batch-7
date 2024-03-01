@@ -19,7 +19,7 @@ const CartTotals = computed(() => Products.getters.listCheckout.length)
                 <div class="position-relative py-2">
                     <div class="position-absolute top-0 start-50 ">
                         <p style="width: 4px; height: 4px;"
-                            class="d-flex justify-content-center rounded-5 bg-body p-2 align-items-center text-danger">
+                            class="d-flex justify-content-center rounded-5 bg-danger p-2 align-items-center text-light ">
                             {{ CartTotals }}
                         </p>
                     </div>
@@ -43,7 +43,7 @@ const CartTotals = computed(() => Products.getters.listCheckout.length)
                             <div class="position-relative py-2">
                                 <div class="position-absolute top-0 start-50 ">
                                     <p style="width: 4px; height: 4px;"
-                                        class="d-flex justify-content-center rounded-5 bg-body p-2 align-items-center text-danger">
+                                        class="d-flex justify-content-center rounded-5 bg-danger p-2 align-items-center text-light ">
                                         {{ CartTotals }}
                                     </p>
                                 </div>

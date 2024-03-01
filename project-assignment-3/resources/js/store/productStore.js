@@ -24,32 +24,36 @@ export const Products = createStore({
                 }
                 return acc;
             }, [])
-        }
+        },
+        TotalCheckout: (state) => state.cart.reduce((acc, item) => acc + item.harga, 0)
     },
     mutations: {
         // Add a mutation to update the data state
         UPDATE_DATA(state, data) {
             state.data = data;
         },
-        UPDATE_CART(state, { title, price, stok }) {
+        UPDATE_CART(state, { title, price, stok, logo }) {
             state.cart.push({
                 nama: title,
                 harga: Number(price),
-                jumlah: Number(1)
+                jumlah: Number(1),
+                logo: logo
             })
         },
-        UPDATE_CARTALL(state, { title, price, stok }) {
+        UPDATE_CARTALL(state, { title, price, stok, logo }) {
             state.cart.push({
                 nama: title,
                 harga: Number(price) * Number(stok),
-                jumlah: Number(stok)
+                jumlah: Number(stok),
+                logo: logo
             })
         },
         DELETE_ALL_PRODUCTS(state, { nama, harga, jumlah }) {
             state.cart = state.cart.filter((item) => item.nama !== nama);
         },
         DELETE_PRODUCTS(state, { nama }) {
-            state.cart = state.cart.filter((item) => item.nama !== nama);
+            // state.cart.splice(nama, 1);
+            state.cart.splice(nama, 1);
         }
     },
     actions: {
@@ -62,21 +66,21 @@ export const Products = createStore({
                 console.error(error);
             }
         },
-        handleProduct(context, { title, price, stok }) {
+        handleProduct(context, { title, price, stok, logo }) {
             const productMenu = this.getters.getData.find((item) => item.title === title)
             console.log(productMenu);
             if (stok > 0) {
                 productMenu.stok--
-                context.commit("UPDATE_CART", { title, price, stok });
+                context.commit("UPDATE_CART", { title, price, stok, logo: productMenu.logo });
                 productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
             }
         },
-        handleProductAll(context, { title, price, stok }) {
+        handleProductAll(context, { title, price, stok, logo }) {
             const productMenu = this.getters.getData.find((item) => item.title === title)
             console.log(productMenu);
             if (stok > 0) {
                 productMenu.stok -= stok
-                context.commit("UPDATE_CARTALL", { title, price, stok });
+                context.commit("UPDATE_CARTALL", { title, price, stok, logo: productMenu.logo });
                 productMenu.stok === 0 ? productMenu.status = false : productMenu.status = true
             }
         },
@@ -98,10 +102,10 @@ export const Products = createStore({
                 // remove the product from CheckoutData if jumlah is 0
                 if (productMenu.jumlah === 0) {
                     listMenuItem.status = true;
-                    // context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah });
+                    context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah });
                     // Remove the item from the cart
-                    context.state.cart.splice(productMenuIndex, 1);
-                    context.state.cart = context.state.cart.filter((item) => item.nama !== nama);
+                    // context.state.cart.splice(productMenuIndex, 1);
+                    // context.state.cart = context.state.cart.filter((item) => item.nama !== nama);
                 }
             } else {
                 console.log('Product not found');
@@ -121,8 +125,8 @@ export const Products = createStore({
                 listMenuItem.stok += 1;
                 // If the quantity of the product becomes 0, remove it from the cart
                 if (productMenu.jumlah === 0) {
-                    context.commit("DELETE_PRODUCTS", { nama });
-                    CheckoutData.value.splice(productMenuIndex, 1);
+                    // context.commit("DELETE_PRODUCTS", { nama });
+                    context.state.cart.splice(productMenuIndex, 1);
                 }
                 // active button add cart again
                 listMenuItem.status = true;

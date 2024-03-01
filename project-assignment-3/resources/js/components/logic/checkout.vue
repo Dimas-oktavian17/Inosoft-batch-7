@@ -11,7 +11,7 @@ const modal = ref(false)
 
 <template>
     <BtnVue :disabled="total === 0" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="modal = !modal"
-        title="Checkout" styleBtn="btn btn-success mt-5" />
+        title="Checkout" styleBtn="btn btn-success mt-5 btnFull" />
     <div :class="[modal ? 'modal d-block' : 'd-none  modal']" id="staticBackdrop" data-bs-backdrop="static"
         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -29,3 +29,8 @@ const modal = ref(false)
     </div>
 </template>
 
+<style scoped>
+.btnFull {
+    width: 100%;
+}
+</style>

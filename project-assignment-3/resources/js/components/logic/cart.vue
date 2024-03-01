@@ -107,9 +107,9 @@ onMounted(async () => {
                         Stok: {{ stok }} || Price: Rp.{{ price }}
                     </p>
                     <BtnVue :disabled="status === false" :title="checkout" styleBtn="btn btn-secondary "
-                        @click="handleProduct(title, price, stok)" /> <span class="text-dark ">-</span>
+                        @click="handleProduct(title, price, stok, logo)" /> <span class="text-dark ">-</span>
                     <BtnVue :disabled="status === false" title="checkout all" styleBtn="btn btn-secondary"
-                        @click="handleProductAll(title, price, stok)" />
+                        @click="handleProductAll(title, price, stok, logo)" />
                 </div>
             </div>
         </div>
