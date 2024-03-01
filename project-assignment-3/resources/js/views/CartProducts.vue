@@ -2,7 +2,9 @@
 import { Products } from '../store/productStore';
 import { computed, ref } from 'vue'
 const dataProducts = computed(() => Products.getters.getCart)
+const realCheckout = computed(() => Products.getters.listCheckout)
 const deleteProduct = (nama, harga, jumlah) => Products.dispatch("deleteProduct", { nama, harga, jumlah })
+const deleteProductOne = (nama) => Products.dispatch("deleteProductOne", { nama })
 </script>
 <template>
     <RouterLink to="/">
@@ -19,7 +21,7 @@ const deleteProduct = (nama, harga, jumlah) => Products.dispatch("deleteProduct"
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
-            <tbody v-for="({ nama, harga, jumlah, index }) in dataProducts" :key="index">
+            <tbody v-for="({ nama, harga, jumlah, index }) in realCheckout" :key="index">
                 <tr>
                     <th scope="row">{{ nama }}</th>
                     <td>{{ jumlah }}</td>

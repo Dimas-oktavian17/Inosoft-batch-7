@@ -10,6 +10,21 @@ export const Products = createStore({
     getters: {
         getData: (state) => state.data.flat(), // Add a getter to retrieve the data
         getCart: (state) => state.cart,
+        // for realtime access data
+        listCheckout: (state) => {
+            return state.cart.reduce((acc, item) => {
+                const existingItem = acc.find(i => i.nama === item.nama);
+                if (existingItem) {
+                    // update jumlah & harga
+                    existingItem.jumlah += item.jumlah;
+                    existingItem.harga += item.harga;
+                } else {
+                    // If the item is not in the accumulator, add it
+                    acc.push({ ...item });
+                }
+                return acc;
+            }, [])
+        }
     },
     mutations: {
         // Add a mutation to update the data state
@@ -31,6 +46,9 @@ export const Products = createStore({
             })
         },
         DELETE_ALL_PRODUCTS(state, { nama, harga, jumlah }) {
+            state.cart = state.cart.filter((item) => item.nama !== nama);
+        },
+        DELETE_PRODUCTS(state, { nama }) {
             state.cart = state.cart.filter((item) => item.nama !== nama);
         }
     },
@@ -64,30 +82,52 @@ export const Products = createStore({
         },
         // CartProducts
         deleteProduct(context, { nama, harga, jumlah }) {
-            const productMenu = this.getters.getCart.find((item) => item.nama === nama)
+            const productMenuIndex = this.getters.listCheckout.findIndex((item) => item.nama === nama);
             const listMenuItem = this.getters.getData.find((item) => item.title === nama);
-            console.log(productMenu.nama === listMenuItem.title ? true : false);
-            if (productMenu && listMenuItem) {
+
+            if (productMenuIndex !== -1 && listMenuItem) {
+                const productMenu = this.getters.listCheckout[productMenuIndex];
+
                 // update jumlah & harga
                 productMenu.jumlah -= jumlah;
-                // productMenu.jumlah;
-                productMenu.harga -= harga
+                productMenu.harga -= harga;
 
                 // update stok in listMenu
-                listMenuItem.jumlah += jumlah
-                // jumlah;
+                listMenuItem.stok += jumlah;
 
                 // remove the product from CheckoutData if jumlah is 0
                 if (productMenu.jumlah === 0) {
-                    listMenuItem.status = true
-                    context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah })
-                    // this.getters.getCart = this.getters.getCart.filter((item) => item.nama !== nama);
+                    listMenuItem.status = true;
+                    context.commit("DELETE_ALL_PRODUCTS", { nama, harga, jumlah });
+                    // Remove the item from the cart
+                    context.state.cart.splice(productMenuIndex, 1);
                 }
             } else {
                 console.log('Product not found');
             }
-
-            // console.log(productMenu);
+        },
+        deleteProductOne(context, { nama }) {
+            const productMenuIndex = this.getters.listCheckout.findIndex((item) => item.nama === nama);
+            const listMenuItem = this.getters.getData.find((item) => item.title === nama);
+            if (productMenuIndex !== -1 && listMenuItem) {
+                // Get the product from CheckoutData
+                const productMenu = this.getters.getCart[productMenuIndex];
+                // Decrease the quantity of the product by 1
+                productMenu.jumlah -= 1;
+                // Decrease the total price of the product by its unit price
+                productMenu.harga -= listMenuItem.price;
+                // Increase the stock of the product in listMenu by 1
+                listMenuItem.stok += 1;
+                // If the quantity of the product becomes 0, remove it from the cart
+                if (productMenu.jumlah === 0) {
+                    context.commit("DELETE_PRODUCTS", { nama });
+                    CheckoutData.value.splice(productMenuIndex, 1);
+                }
+                // active button add cart again
+                listMenuItem.status = true;
+            } else {
+                console.log('Product not found');
+            }
         }
     },
 });
