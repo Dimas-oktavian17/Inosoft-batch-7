@@ -1,5 +1,5 @@
 <script setup>
-import { listMenu } from '@/composable/component.js'
+import { ComponentStore } from 'stores/componentStore'
 </script>
 <template>
     <DefaultLayout>
@@ -28,7 +28,8 @@ import { listMenu } from '@/composable/component.js'
         </aside>
         <article id="menu"
             class="row pt-5 text-light flex-column  flex-lg-row   d-flex justify-content-center  align-items-center ">
-            <div v-for="({ title, logo, deskripsi, index }) in listMenu" :key="index" class="col-lg-4 pt-5 pt-lg-0 ">
+            <div v-for="({ title, logo, deskripsi, index }) in ComponentStore.state.ListMenu" :key="index"
+                class="col-lg-4 pt-5 pt-lg-0 ">
                 <div class="card bg-dark">
                     <div class="card-body">
                         <IconVue :icon="logo" class="text-light w-25 h-auto " />

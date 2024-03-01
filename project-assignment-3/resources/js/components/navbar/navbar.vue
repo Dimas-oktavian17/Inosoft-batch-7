@@ -1,10 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { navItem } from '@/composable/component.js'
+import { ComponentStore } from 'stores/componentStore'
+import { Products } from '../../store/productStore';
 defineProps(['title'])
 let hamburger = ref(false)
-import { Products } from '../../store/productStore';
-// const CartTotals = computed(() => Products.getters.getCart.length)
 const CartTotals = computed(() => Products.getters.listCheckout.length)
 </script>
 
@@ -19,7 +18,7 @@ const CartTotals = computed(() => Products.getters.listCheckout.length)
                 <div class="position-relative py-2">
                     <div class="position-absolute top-0 start-50 ">
                         <p style="width: 4px; height: 4px;"
-                            class="d-flex justify-content-center rounded-5 bg-body p-2 align-items-center text-danger">
+                            class="d-flex justify-content-center rounded-5 bg-danger p-2 align-items-center text-light ">
                             {{ CartTotals }}
                         </p>
                     </div>
@@ -34,7 +33,8 @@ const CartTotals = computed(() => Products.getters.listCheckout.length)
             <div class="d-none d-lg-block">
                 <div :class="{ 'collapse': !hamburger, 'navbar-collapse': true }" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item" v-for="({ title, style, link, index }) in navItem" :key="index">
+                        <li class="nav-item" v-for="({ title, style, link, index }) in ComponentStore.state.navItem"
+                            :key="index">
                             <a :class="style" :href="link">
                                 {{ title }}
                             </a>
@@ -43,7 +43,7 @@ const CartTotals = computed(() => Products.getters.listCheckout.length)
                             <div class="position-relative py-2">
                                 <div class="position-absolute top-0 start-50 ">
                                     <p style="width: 4px; height: 4px;"
-                                        class="d-flex justify-content-center rounded-5 bg-body p-2 align-items-center text-danger">
+                                        class="d-flex justify-content-center rounded-5 bg-danger p-2 align-items-center text-light ">
                                         {{ CartTotals }}
                                     </p>
                                 </div>
