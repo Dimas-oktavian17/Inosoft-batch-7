@@ -34,7 +34,7 @@ const deleteProductOne = (nama) => Products.dispatch("deleteProductOne", { nama 
                     </td>
                 </tr>
             </tbody>
-            <tbody>
+            <!-- <tbody>
                 <tr>
                     <th scope="row">Total:</th>
                     <td></td>
@@ -42,7 +42,7 @@ const deleteProductOne = (nama) => Products.dispatch("deleteProductOne", { nama 
                     <td></td>
                 </tr>
             </tbody>
-            <CheckoutVue :total="TotalCheckout" />
+            <CheckoutVue :total="TotalCheckout" /> -->
         </table>
     </article>
 </template>
